@@ -1,0 +1,77 @@
+@use "../../globals.scss" as *;
+
+.Card {
+  background: $color-light-1;
+  border: 1.5px solid $color-light-2;
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 0 $color-light-3;
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  margin: 1.5rem 0;
+  min-width: 270px;
+  max-width: 420px;
+  font-family: "Lora", serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.CardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.CardTitle {
+  font-size: 2.1rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  margin: 0;
+  color: #222;
+}
+
+.StatusDone {
+  background: $color-accent-1;
+  color: #222;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 0.2rem 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 2px 2px 0 0 $color-light-3;
+}
+
+.StatusInProgress {
+  background: $color-light-2;
+  color: #888;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 0.2rem 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 2px 2px 0 0 $color-light-3;
+}
+
+.CardDescription {
+  font-size: 1.1rem;
+  color: #444;
+  margin: 0 0 0.5rem 0;
+  opacity: 0.85;
+}
+
+.CardActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.CompleteBtn {
+  background: $color-accent-1;
+  color: #222;
+}
+
+.DeleteBtn {
+  background: $color-light-2;
+  color: #b33a3a;
+  border: 1.5px solid #b33a3a;
+}

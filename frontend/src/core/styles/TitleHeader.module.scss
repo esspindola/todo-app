@@ -1,0 +1,43 @@
+@use "../../globals.scss" as *;
+
+.TitleSection {
+  background-color: #f1e8d4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  border-radius: 0 0 27px 27px;
+  box-shadow: 8px 8px 0 0 $color-light-3;
+}
+
+.TitleHeader {
+  font-size: 10rem;
+  font-weight: 900;
+  filter: drop-shadow(4px 4px 0 $color-light-4);
+}
+
+.HeroSubtitle {
+  color: rgb(0, 0, 0);
+  opacity: 0.4;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .TitleHeader {
+    font-size: 5rem;
+  }
+  .HeroSubtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .TitleHeader {
+    font-size: 7.6rem;
+  }
+  .HeroSubtitle {
+    font-size: 1.5rem;
+  }
+}

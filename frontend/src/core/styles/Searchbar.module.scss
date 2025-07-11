@@ -1,0 +1,38 @@
+@use "../../globals.scss" as *;
+
+.SearchbarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  background: $color-light-1;
+  border: 1.5px solid $color-light-2;
+  border-radius: 14px;
+  box-shadow: 5px 5px 0 0 $color-light-3;
+  padding: 0.7rem 1.2rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.SearchInput {
+  flex: 1;
+  background: $color-light-1;
+  border: none;
+  outline: none;
+  font-family: "Lora", serif;
+  font-size: 1.1rem;
+  color: #222;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+}
+
+.FilterButton {
+  background: $color-light-2;
+  color: $color-light-4;
+  border: 1.5px solid $color-light-3;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  padding: 0.5rem 1.2rem;
+  min-width: 90px;
+}

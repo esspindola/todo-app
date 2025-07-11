@@ -1,0 +1,34 @@
+@import "../../globals.scss";
+
+.Button {
+  background: $color-light-2;
+  color: $color-light-4;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.8rem 2.5rem;
+  border: 1.5px solid $color-light-2;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 0 $color-light-3;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.15s,
+    border-color 0.2s;
+  outline: none;
+  margin-top: 2rem;
+}
+
+.Button:hover:not(:disabled) {
+  background: $color-light-2;
+  border-color: $color-accent-1;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 5px 5px 0 0 $color-light-3;
+}
+
+.Button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.Button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
