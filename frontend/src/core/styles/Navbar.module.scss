@@ -1,0 +1,119 @@
+@use "../../globals.scss" as *;
+
+.Navbar {
+  position: relative;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: #f1e8d4;
+  box-shadow: none;
+  padding: 1.1rem 0 1.1rem 0;
+}
+
+.NavbarContent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+}
+
+.NavbarLeft {
+  display: flex;
+  align-items: center;
+}
+
+.Logo {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: $color-light-4;
+  letter-spacing: 1.2px;
+}
+
+.NavbarCenter {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.PillBtn {
+  background: $color-light-3;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.02rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  padding: 0.45rem 1.3rem;
+  min-width: 90px;
+  letter-spacing: 0.5px;
+  transition: background 0.18s, color 0.18s, transform 0.15s;
+}
+
+.PillBtn:hover {
+  background: $color-light-4;
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.NavbarRight {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.ActionBtn {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.02rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  padding: 0.45rem 1.3rem;
+  min-width: 90px;
+  letter-spacing: 0.5px;
+  transition: background 0.18s, color 0.18s, transform 0.15s;
+}
+
+.ActionBtnLogin {
+  background: none;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.02rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  padding: 0.45rem 1.3rem;
+  min-width: 90px;
+  letter-spacing: 0.5px;
+  transition: color 0.18s, transform 0.15s;
+  cursor: pointer;
+}
+
+.ActionBtn:hover {
+  background: $color-accent-2;
+  color: #222;
+  transform: translateY(-2px) scale(1.04);
+}
+
+@media (max-width: 900px) {
+  .NavbarContent {
+    padding: 0 0.7rem;
+  }
+  .NavbarCenter {
+    gap: 0.3rem;
+  }
+  .NavbarRight {
+    gap: 0.3rem;
+  }
+  .PillBtn,
+  .ActionBtn {
+    font-size: 0.95rem;
+    padding: 0.35rem 0.7rem;
+    min-width: 70px;
+  }
+}
