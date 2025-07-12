@@ -183,7 +183,14 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
+REST_AUTH_REGISTER_SERIALIZERS = {
+    "REGISTER_SERIALIZER": "todo.serializers.CustomRegisterSerializer",
+}
+
 # dj-rest-auth configuration
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = "access-token"
 JWT_AUTH_REFRESH_COOKIE = "refresh-token"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_REQUIRED = True
+EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"

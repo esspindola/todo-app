@@ -1,5 +1,3 @@
-import { useSnapshot } from "valtio";
-import { authStore } from "../store/authStore";
 import React, { useState } from "react";
 import styles from "../styles/RegisterForm.module.scss";
 import Button from "./ui/Button";
@@ -86,17 +84,12 @@ const RegisterForm: React.FC = () => {
         formData.confirmPassword
       );
 
-      if (result.access) {
-        // Registro exitoso con JWT
-        const userResult = await api.getUser();
-        if (userResult.id || userResult.username) {
-          authStore.setUser(
-            { username: userResult.username, email: userResult.email },
-            result.access,
-            result.refresh || ""
-          );
-          window.location.href = "/";
-        }
+      if (
+        (result &&
+          (result.id || result.pk || result.email || result.username)) ||
+        result.status === 201
+      ) {
+        window.location.href = "/auth/login";
       } else if (
         result.detail ||
         result.non_field_errors ||

@@ -75,7 +75,7 @@ export const api = {
       }
     }
 
-    return data;
+    return { ...data, status: res.status, ok: res.ok };
   },
 
   logout: () => {
