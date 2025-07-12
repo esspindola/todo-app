@@ -5,100 +5,146 @@
   border: 1.5px solid $color-light-2;
   border-radius: 18px;
   box-shadow: 6px 6px 0 0 $color-light-3;
-  padding: 2.2rem 2rem 1.5rem 2rem;
+  padding: 0;
   margin: 1.5rem 0;
-  min-width: 270px;
-  max-width: 420px;
+  width: 540px;
+  height: 340px;
   font-family: "Lora", serif;
   display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.CardSideActions {
+  width: 80px;
+  background: $color-light-2;
+  display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.5rem 0 1.5rem 0;
+  gap: 0;
+  border-right: 1px solid $color-light-3;
+  height: 100%;
+  position: relative;
+}
+
+.ActionButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.ActionButton.view {
+  margin-top: 0;
+}
+
+.ActionButton.delete {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0;
+}
+
+.ActionButton svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  stroke: #222;
+  fill: none;
+}
+
+.ActionButton:hover svg {
+  stroke: $color-accent-2;
+}
+
+.CardMainContent {
+  flex: 1;
+  padding: 2.2rem 2rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .CardHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1.2rem;
   gap: 1rem;
 }
 
 .CardTitle {
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   font-family: "Manrope", sans-serif;
   font-weight: 800;
   margin: 0;
-  color: #222;
+  color: $color-accent-2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .StatusDone {
   background: $color-accent-1;
   color: #222;
-  font-size: 1rem;
-  border-radius: 8px;
-  padding: 0.2rem 0.8rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  box-shadow: 2px 2px 0 0 $color-light-3;
+  flex-shrink: 0;
 }
 
 .StatusInProgress {
-  background: $color-light-2;
-  color: #888;
-  font-size: 1rem;
-  border-radius: 8px;
-  padding: 0.2rem 0.8rem;
+  background: $color-light-3;
+  color: $color-light-4;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  box-shadow: 2px 2px 0 0 $color-light-3;
+  flex-shrink: 0;
+}
+
+.CardContent {
+  flex-grow: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .CardDescription {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #444;
-  margin: 0 0 0.5rem 0;
-  opacity: 0.85;
+  margin: 0 0 1rem 0;
+  flex-grow: 1;
+  line-height: 1.5;
+  overflow: hidden;
+  white-space: pre-line;
+  word-break: break-word;
+  display: block;
 }
 
 .CardDate {
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 1rem;
+  color: $color-light-4;
   font-style: italic;
-  margin: 0.5rem 0;
-  opacity: 0.7;
-}
-
-.CardActions {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.CompleteBtn {
-  background: $color-accent-1;
-  color: #222;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.8rem;
-  flex: 1;
-  min-width: fit-content;
-}
-
-.EditBtn {
-  background: #3b82f6;
-  color: white;
-  border: 1.5px solid #2563eb;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.8rem;
-  flex: 1;
-  min-width: fit-content;
-}
-
-.DeleteBtn {
-  background: $color-light-2;
-  color: #b33a3a;
-  border: 1.5px solid #b33a3a;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.8rem;
-  flex: 1;
-  min-width: fit-content;
+  margin-top: auto;
+  opacity: 0.8;
 }

@@ -3,7 +3,10 @@ import styles from "../../styles/Searchbar.module.scss";
 import Button from "./Button";
 
 interface SearchbarProps {
-  onSearch: (searchTerm: string) => void;
+  searchTerm: string;
+  onSearchKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClearSearch: () => void;
   onFilterChange: (filters: FilterState) => void;
   filters: FilterState;
 }
@@ -15,18 +18,14 @@ export interface FilterState {
 }
 
 export default function Searchbar({
-  onSearch,
+  searchTerm,
+  onSearchKeyDown,
+  onSearchChange,
+  onClearSearch,
   onFilterChange,
   filters,
 }: SearchbarProps) {
-  const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    onSearch(value);
-  };
 
   const handleStatusFilter = (status: boolean | null) => {
     onFilterChange({ ...filters, done: status });
@@ -41,8 +40,7 @@ export default function Searchbar({
 
   const clearFilters = () => {
     onFilterChange({});
-    setSearchTerm("");
-    onSearch("");
+    onClearSearch();
   };
 
   return (
@@ -51,10 +49,28 @@ export default function Searchbar({
         <input
           className={styles.SearchInput}
           type="text"
-          placeholder="Search tasks..."
+          placeholder="Search tasks... (press Enter to search)"
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={onSearchChange}
+          onKeyDown={onSearchKeyDown}
         />
+        {searchTerm && (
+          <button
+            onClick={onClearSearch}
+            style={{
+              background: "none",
+              border: "none",
+              fontSize: "1.5rem",
+              cursor: "pointer",
+              color: "#888",
+              marginLeft: 4,
+            }}
+            tabIndex={0}
+            aria-label="Limpiar búsqueda"
+          >
+            &times;
+          </button>
+        )}
         <Button
           className={styles.FilterButton}
           onClick={() => setShowFilters(!showFilters)}

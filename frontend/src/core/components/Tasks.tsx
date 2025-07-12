@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useSnapshot } from "valtio";
 import { authStore } from "../store/authStore";
 import { api } from "../utils/api.service";
@@ -7,6 +7,7 @@ import Card from "./ui/Card";
 import Searchbar, { type FilterState } from "./ui/Searchbar";
 import Button from "./ui/Button";
 import TaskForm from "./TaskForm";
+import Pagination from "./ui/Pagination";
 
 interface Task {
   id: number;
@@ -14,6 +15,13 @@ interface Task {
   description: string;
   done: boolean;
   created_at: string;
+}
+
+interface PaginatedResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Task[];
 }
 
 export default function Tasks() {
@@ -24,15 +32,20 @@ export default function Tasks() {
   const [showEditForm, setShowEditForm] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState<FilterState>({});
   const [authError, setAuthError] = useState(false);
-  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [pagination, setPagination] = useState({
+    count: 0,
+    currentPage: 1,
+    totalPages: 1,
+  });
 
   const queryParams = useMemo(() => {
     const params: any = {};
 
-    if (searchTerm) {
-      params.search = searchTerm;
+    if (searchQuery) {
+      params.search = searchQuery;
     }
 
     if (filters.done !== undefined && filters.done !== null) {
@@ -47,8 +60,10 @@ export default function Tasks() {
       params.created_at_before = filters.created_at_before;
     }
 
+    params.page = pagination.currentPage;
+
     return params;
-  }, [searchTerm, filters]);
+  }, [searchQuery, filters, pagination.currentPage]);
 
   const fetchTasks = useCallback(async () => {
     if (!snap.access) {
@@ -59,9 +74,15 @@ export default function Tasks() {
     setLoading(true);
     setAuthError(false);
     try {
-      const response = await api.getTasks(queryParams);
+      const response = (await api.getTasks(queryParams)) as PaginatedResponse;
       if (response.results) {
         setTasks(response.results);
+        const totalPages = Math.ceil(response.count / 10);
+        setPagination((prev) => ({
+          ...prev,
+          count: response.count,
+          totalPages: totalPages || 1,
+        }));
       }
     } catch (error: any) {
       setAuthError(true);
@@ -124,7 +145,14 @@ export default function Tasks() {
     }
     setAuthError(false);
     try {
-      const response = await api.updateTask(taskId, { done: !currentDone });
+      const task = tasks.find((t) => t.id === taskId);
+      if (!task) return;
+      const response = await api.updateTask(taskId, {
+        title: task.title,
+        description: task.description,
+        done: !currentDone,
+        created_at: task.created_at,
+      });
       if (response.id) {
         setTasks((prev) =>
           prev.map((task) =>
@@ -158,21 +186,30 @@ export default function Tasks() {
     setShowEditForm(true);
   };
 
-  const handleSearch = (term: string) => {
-    setSearchTerm(term);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+  };
 
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      setSearchQuery(searchTerm);
+      setPagination((prev) => ({ ...prev, currentPage: 1 }));
     }
+  };
 
-    searchTimeoutRef.current = setTimeout(() => {
-      setLoading(true);
-    }, 800);
+  const handleClearSearch = () => {
+    setSearchTerm("");
+    setSearchQuery("");
+    setPagination((prev) => ({ ...prev, currentPage: 1 }));
   };
 
   const handleFilterChange = (newFilters: FilterState) => {
     setFilters(newFilters);
-    setLoading(true);
+    setPagination((prev) => ({ ...prev, currentPage: 1 }));
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setPagination((prev) => ({ ...prev, currentPage: newPage }));
   };
 
   useEffect(() => {
@@ -185,14 +222,6 @@ export default function Tasks() {
     fetchTasks();
   }, [fetchTasks]);
 
-  useEffect(() => {
-    return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div className={styles.Tasks}>
       {authError ? (
@@ -202,7 +231,10 @@ export default function Tasks() {
       ) : (
         <>
           <Searchbar
-            onSearch={handleSearch}
+            searchTerm={searchTerm}
+            onSearchKeyDown={handleSearchKeyDown}
+            onSearchChange={handleSearchChange}
+            onClearSearch={handleClearSearch}
             onFilterChange={handleFilterChange}
             filters={filters}
           />
@@ -250,6 +282,7 @@ export default function Tasks() {
                   title={task.title}
                   description={task.description}
                   status={task.done ? "completado" : "en curso"}
+                  done={task.done}
                   createdAt={task.created_at}
                   onDelete={() => deleteTask(task.id)}
                   onComplete={() => toggleTask(task.id, task.done)}
@@ -258,6 +291,14 @@ export default function Tasks() {
               ))
             )}
           </div>
+
+          {!loading && tasks.length > 0 && pagination.totalPages > 1 && (
+            <Pagination
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+              onPageChange={handlePageChange}
+            />
+          )}
         </>
       )}
     </div>
