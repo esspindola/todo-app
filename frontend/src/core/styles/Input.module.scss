@@ -1,0 +1,49 @@
+@use "../../globals.scss" as *;
+
+.InputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+}
+
+.Label {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $color-light-4;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3px;
+}
+
+.Input {
+  background: $color-light-2;
+  border: 2px solid $color-light-3;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  transition: border-color 0.2s, background-color 0.2s;
+  outline: none;
+  color: #333;
+}
+
+.Input:focus {
+  border-color: $color-accent-2;
+  background: #fff;
+}
+
+.Input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.InputError {
+  border-color: #e74c3c;
+}
+
+.ErrorMessage {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.85rem;
+  color: #e74c3c;
+  margin-top: 0.4rem;
+  font-weight: 500;
+}

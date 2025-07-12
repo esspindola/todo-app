@@ -1,0 +1,119 @@
+@use "sass:color";
+@use "../../globals.scss" as *;
+
+.RegisterFormContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, $color-light-1 0%, $color-light-2 100%);
+}
+
+.RegisterForm {
+  background: #fff;
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 40px rgba(165, 151, 130, 0.15);
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid $color-light-3;
+}
+
+.Title {
+  font-family: "Manrope", sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: $color-light-4;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.Subtitle {
+  font-family: "Lora", serif;
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+}
+
+.SubmitButton {
+  background: $color-accent-2;
+  color: #222;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+}
+
+.SubmitButton:hover:not(:disabled) {
+  background: color.adjust($color-accent-2, $lightness: -10%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(52, 232, 187, 0.3);
+}
+
+.SubmitButton:disabled {
+  background: $color-light-3;
+  color: #999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ErrorGeneral {
+  background: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.9rem;
+  color: #c33;
+  text-align: center;
+}
+
+.LoginLink {
+  text-align: center;
+  margin-top: 2rem;
+  font-family: "Lora", serif;
+  color: #666;
+}
+
+.Link {
+  color: $color-accent-2;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.Link:hover {
+  color: color.adjust($color-accent-2, $lightness: -15%);
+  text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+  .RegisterForm {
+    padding: 2rem 1.5rem;
+    margin: 1rem;
+  }
+
+  .Title {
+    font-size: 1.6rem;
+  }
+
+  .Subtitle {
+    font-size: 0.9rem;
+  }
+}

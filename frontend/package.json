@@ -9,7 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.11.0"
+    "astro": "^5.11.0",
+    "valtio": "^2.1.5"
   },
   "devDependencies": {
     "@astrojs/react": "^4.3.0",

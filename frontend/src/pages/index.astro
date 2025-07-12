@@ -1,21 +1,24 @@
 ---
-import TitleHeader from "../core/components/TitleHeader"
-import Tasks from "../core/components/Tasks"
-import Navbar from "../core/components/layout/Navbar"
-import "../globals.scss"
+import TitleHeader from "../core/components/TitleHeader";
+import Tasks from "../core/components/Tasks";
+import Navbar from "../core/components/layout/Navbar";
+import { AuthProvider } from "../core/context/AuthContext";
+import "../globals.scss";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Beat Yourself</title>
-	</head>
-	<body>
-		<Navbar />
-		<TitleHeader client:load />
-		<Tasks client:load />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Beat Yourself</title>
+  </head>
+  <body>
+    <AuthProvider client:load>
+      <Navbar client:load />
+      <TitleHeader client:load />
+      <Tasks client:load />
+    </AuthProvider>
+  </body>
 </html>

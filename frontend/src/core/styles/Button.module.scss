@@ -1,4 +1,4 @@
-@import "../../globals.scss";
+@use "../../globals.scss" as *;
 
 .Button {
   background: $color-light-2;

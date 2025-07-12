@@ -1,34 +1,92 @@
-const API_BASE = import.meta.env.PUBLIC_API_URL;
+const API_BASE =
+  typeof import.meta.env.PUBLIC_API_URL !== "undefined"
+    ? import.meta.env.PUBLIC_API_URL
+    : typeof window !== "undefined" && (window as any).PUBLIC_API_URL
+    ? (window as any).PUBLIC_API_URL
+    : "http://localhost:8000/api";
 
 const getToken = () => localStorage.getItem("token");
 
-const headers = () => ({
-  "Content-Type": "application/json",
-  Authorization: `Bearer ${getToken()}`,
-});
+const headers = () => {
+  const token = getToken();
+  const base = { "Content-Type": "application/json" };
+  return token ? { ...base, Authorization: `Bearer ${token}` } : base;
+};
+
+function setCookie(name: string, value: string, days = 7) {
+  if (typeof document !== "undefined") {
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
+    document.cookie = `${name}=${encodeURIComponent(
+      value
+    )}; expires=${expires}; path=/; secure; samesite=strict`;
+  }
+}
+
+function deleteCookie(name: string) {
+  if (typeof document !== "undefined") {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  }
+}
 
 export const api = {
-  login: async (email: string, password: string) => {
-    const res = await fetch(`${API_BASE}/auth/login/`, {
+  login: async (username: string, password: string) => {
+    const res = await fetch(`${API_BASE}/token/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ username, password }),
     });
     const data = await res.json();
-    if (res.ok) localStorage.setItem("token", data.access);
+
+    if (res.ok && data.access) {
+      localStorage.setItem("token", data.access);
+      setCookie("access_token", data.access);
+      if (data.refresh) {
+        localStorage.setItem("refresh_token", data.refresh);
+        setCookie("refresh_token", data.refresh);
+      }
+    }
+
     return data;
   },
 
-  register: async (email: string, password1: string, password2: string) => {
+  register: async (
+    email: string,
+    username: string,
+    password1: string,
+    password2: string
+  ) => {
     const res = await fetch(`${API_BASE}/auth/registration/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password1, password2 }),
+      body: JSON.stringify({ email, username, password1, password2 }),
+    });
+    const data = await res.json();
+
+    if (res.ok && data.access) {
+      localStorage.setItem("token", data.access);
+      setCookie("access_token", data.access);
+      if (data.refresh) {
+        localStorage.setItem("refresh_token", data.refresh);
+        setCookie("refresh_token", data.refresh);
+      }
+    }
+
+    return data;
+  },
+
+  logout: () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    deleteCookie("access_token");
+    deleteCookie("refresh_token");
+  },
+
+  getUser: async () => {
+    const res = await fetch(`${API_BASE}/auth/user/`, {
+      headers: headers(),
     });
     return res.json();
   },
-
-  logout: () => localStorage.removeItem("token"),
 
   getTasks: async (filters = {}) => {
     const params = new URLSearchParams(filters as any).toString();
