@@ -1,4 +1,11 @@
-from django_filters.rest_framework import DjangoFilterBackend, FilterSet, DateFilter
+from django_filters.rest_framework import (
+    DjangoFilterBackend,
+    FilterSet,
+    DateFilter,
+    BooleanFilter,
+    CharFilter,
+)
+from django.db import models
 from rest_framework import viewsets, permissions
 from .models import Task
 from .serializers import TaskSerializer
@@ -7,10 +14,16 @@ from .serializers import TaskSerializer
 class TaskFilter(FilterSet):
     created_at_after = DateFilter(field_name="created_at", lookup_expr="gte")
     created_at_before = DateFilter(field_name="created_at", lookup_expr="lte")
+    search = CharFilter(method="filter_search")
 
     class Meta:
         model = Task
         fields = ["done", "title", "description"]
+
+    def filter_search(self, queryset, name, value):
+        return queryset.filter(
+            models.Q(title__icontains=value) | models.Q(description__icontains=value)
+        )
 
 
 class TaskViewSet(viewsets.ModelViewSet):

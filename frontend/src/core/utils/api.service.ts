@@ -5,7 +5,11 @@ const API_BASE =
     ? (window as any).PUBLIC_API_URL
     : "http://localhost:8000/api";
 
-const getToken = () => localStorage.getItem("token");
+import { authStore } from "../store/authStore";
+const getToken = () => {
+  if (authStore.access) return authStore.access;
+  return localStorage.getItem("token");
+};
 
 const headers = () => {
   const token = getToken();

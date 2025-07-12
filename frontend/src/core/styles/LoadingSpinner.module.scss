@@ -1,0 +1,43 @@
+@use "../../globals.scss" as *;
+
+.SpinnerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.Spinner {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  border-radius: 50%;
+  background: linear-gradient(45deg, $color-accent-1, $color-accent-2);
+  animation: spin 1.5s linear infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.SpinnerInner {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  background: white;
+  border-radius: 50%;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

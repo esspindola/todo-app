@@ -1,0 +1,63 @@
+@use "../../globals.scss" as *;
+
+.TaskForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.TextareaGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.Label {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $color-light-4;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3px;
+}
+
+.Textarea {
+  background: $color-light-2;
+  border: 2px solid $color-light-3;
+  border-radius: 8px;
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color 0.2s, background-color 0.2s;
+  outline: none;
+  color: #333;
+}
+
+.Textarea:focus {
+  border-color: $color-accent-2;
+  background: #fff;
+}
+
+.Textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.FormActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.CancelButton {
+  background-color: $color-light-2;
+  color: $color-light-4;
+  border: 2px solid $color-light-3;
+}
+
+.CancelButton:hover {
+  background-color: $color-light-3;
+}

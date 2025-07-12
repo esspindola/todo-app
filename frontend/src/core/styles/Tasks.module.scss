@@ -9,6 +9,7 @@
 }
 
 .CardsGrid {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.5rem 2.5rem;
@@ -16,6 +17,14 @@
   align-items: start;
   width: 100%;
   margin-top: 2.5rem;
+}
+
+.SpinnerContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
 }
 
 @media (max-width: 900px) {

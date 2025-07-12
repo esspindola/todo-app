@@ -2,6 +2,14 @@
 
 .SearchbarWrapper {
   display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.SearchContainer {
+  display: flex;
   align-items: center;
   gap: 1.2rem;
   background: $color-light-1;
@@ -9,8 +17,6 @@
   border-radius: 14px;
   box-shadow: 5px 5px 0 0 $color-light-3;
   padding: 0.7rem 1.2rem;
-  width: 100%;
-  max-width: 480px;
 }
 
 .SearchInput {
@@ -35,4 +41,86 @@
   font-weight: 700;
   padding: 0.5rem 1.2rem;
   min-width: 90px;
+}
+
+.FiltersPanel {
+  background: $color-light-1;
+  border: 1.5px solid $color-light-2;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 3px 3px 0 0 $color-light-3;
+}
+
+.FilterGroup {
+  margin-bottom: 1.5rem;
+}
+
+.FilterLabel {
+  display: block;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: $color-light-4;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.3px;
+}
+
+.FilterButtons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.FilterBtn {
+  background: $color-light-2;
+  color: $color-light-4;
+  border: 1.5px solid $color-light-3;
+  border-radius: 8px;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.FilterBtn:hover {
+  background: $color-light-3;
+}
+
+.FilterBtn.Active {
+  background: $color-accent-1;
+  color: #222;
+  border-color: $color-accent-2;
+}
+
+.DateInputs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.DateInput {
+  background: $color-light-2;
+  border: 1.5px solid $color-light-3;
+  border-radius: 8px;
+  font-family: "Lora", serif;
+  font-size: 0.95rem;
+  color: #333;
+  padding: 0.6rem 0.8rem;
+  flex: 1;
+  min-width: 140px;
+}
+
+.DateInput:focus {
+  outline: none;
+  border-color: $color-accent-2;
+  background: #fff;
+}
+
+.ClearFilters {
+  background: $color-light-2;
+  color: #b33a3a;
+  border: 1.5px solid #b33a3a;
+  margin-top: 1rem;
 }

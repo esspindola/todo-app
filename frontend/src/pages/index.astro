@@ -2,7 +2,6 @@
 import TitleHeader from "../core/components/TitleHeader";
 import Tasks from "../core/components/Tasks";
 import Navbar from "../core/components/layout/Navbar";
-import { AuthProvider } from "../core/context/AuthContext";
 import "../globals.scss";
 ---
 
@@ -15,10 +14,8 @@ import "../globals.scss";
     <title>Beat Yourself</title>
   </head>
   <body>
-    <AuthProvider client:load>
       <Navbar client:load />
       <TitleHeader client:load />
-      <Tasks client:load />
-    </AuthProvider>
+      <Tasks client:load/>
   </body>
 </html>
