@@ -1,0 +1,7 @@
+Django>=5.2.4
+djangorestframework
+django-filter
+djangorestframework-simplejwt
+dj-rest-auth
+django-allauth
+django-cors-headers

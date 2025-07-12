@@ -1,0 +1,75 @@
+# === Python / Django ===
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.mo
+
+# Django local settings
+local_settings.py
+
+# Virtualenv
+venv/
+.env
+.env.*
+
+# === Node / Astro ===
+frontend/node_modules/
+frontend/.astro/
+frontend/dist/
+frontend/.vercel/
+frontend/.next/
+
+# === OS crap ===
+.DS_Store
+Thumbs.db
+
+# === VSCode ===
+.vscode/
+*.code-workspace
+
+# === Env vars ===
+*.env
+.env.*
+
+# === Coverage / testing ===
+htmlcov/
+.coverage
+.tox/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# === Build / packaging ===
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+
+# === Logs ===
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.mo
+*.pid
+
+# === Editor swap files ===
+*.swp
+*.swo
+*.swn
